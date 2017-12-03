@@ -22,10 +22,7 @@ arrows2 = '=> => => => =>';
 %        //There are 4 types of arrows that can be retrieved
 
 selection = 3;
-arrowString0 = '-> -> -> -> ->'
-arrowString1 = '-> -> <- -> ->';
-arrowString2 = '<- <- -> <- <-';
-arrowString3 = '<- <- <- <- <-';
+
 
  
 if selection == 0 
@@ -79,6 +76,14 @@ yTop = 100;
 xBottom = 0;
 yBottom = -100;
 
+
+arrowString0 = '=>  =>  =>  =>  =>'
+arrowString1 = '=>  =>  <=  =>  =>';
+arrowString2 = '<=  <=  =>  <=  <=';
+arrowString3 = '<=  <=  <=  <=  <=';
+
+
+
 preparestring('this is text above',1,xTop,yTop);
 preparestring('this is text below',1,xBottom,yBottom);
 drawpict(1);
@@ -87,6 +92,7 @@ preparestring(arrowString0,1);
 drawpict(1);
 wait(500);
 clearpict(1);
+
 
 %%KEYBOARD INPUT FEATURE
 
@@ -142,7 +148,39 @@ wait(500);
 pause();
 clearpict(1);
 
+%NOW TO DISPLAY ARROWS
 
+%the number needs to be uint8 to make matlab use it as an integer
+ %generate the random presentation of arrows
+numTrials = uint8(5)
+arrows(1,numTrials) = 0
+
+ 
+randMin = 0;
+randMax = 3;
+for i = 1:numTrials
+ 
+   randAssignment = randMin+rand(1,numTrials)*(randMax - randMin);
+   %% 
+%%   arrows{0,i} = uint8(randAssignment);
+   switch arrows(i)
+       case 1
+           preparestring(arrowString0,1,xTop,yTop);
+       case 2
+           preparestring(arrowString1,1,xTop,yTop);
+       case 3
+           preparestring(arrowString2,1,xTop,yTop);
+       case 4
+           preparestring(arrowString0,1,xTop,yTop);
+       otherwise
+           preparestring('NONE',1,xTop,yTop);
+   end
+drawpict(1);
+wait(1000);
+clearpict(1);
+end
+
+           
 
 %%END KEYBOARD INPUT
 
